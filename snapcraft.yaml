@@ -1,0 +1,28 @@
+name: parity
+version: master
+summary: The fast, light, and robust EVM and WASM client.
+description: |
+  Built for mission-critical use: Miners, service providers, and exchanges
+  need fast synchronisation and maximum uptime. Parity Ethereum provides the
+  core infrastructure essential for speedy and reliable services.
+
+confinement: devmode
+
+apps:
+  parity:
+    command: parity
+
+parts:
+  parity:
+    source: https://github.com/paritytech/parity-ethereum.git
+    plugin: nil
+    build-packages:
+      - cargo
+      - libudev-dev
+      - libudev1
+      - libstdc++6
+      - cmake
+    override-build: |
+       cargo build --release --features final
+       mkdir $SNAPCRAFT_PART_INSTALL/bin
+       mv target/release/parity $SNAPCRAFT_PART_INSTALL/bin/
