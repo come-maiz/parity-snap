@@ -6,7 +6,7 @@ set -ev
 
 snap() {
     snapcraft clean
-    snapcraft --target-arch $3
+    snapcraft --target-arch $1
 }
 
 snap amd64
