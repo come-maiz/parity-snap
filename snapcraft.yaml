@@ -6,11 +6,15 @@ description: |
   need fast synchronisation and maximum uptime. Parity Ethereum provides the
   core infrastructure essential for speedy and reliable services.
 
-confinement: devmode
+confinement: strict
 
 apps:
   parity:
     command: parity
+    plugs:
+      - network
+      - network-bind
+      - removable-media
 
 parts:
   parity:
@@ -18,10 +22,13 @@ parts:
     plugin: nil
     build-packages:
       - cargo
+      - g++
       - libudev-dev
       - libudev1
-      - libstdc++6
       - cmake
+    stage-packages:
+      - libc6
+      - libstdc++6
     override-build: |
        cargo build --release --features final
        mkdir $SNAPCRAFT_PART_INSTALL/bin
