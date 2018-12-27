@@ -10,5 +10,6 @@ snap() {
 }
 
 snap amd64
+snap i386
 snap armhf
 snap arm64
