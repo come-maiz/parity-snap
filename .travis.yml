@@ -18,7 +18,7 @@ env:
 
 script:
   - /snap/bin/snapcraft clean
-  - /snap/bin/snapcraft --target-arch $ARCHITECTURE
+  - travis_wait /snap/bin/snapcraft --target-arch $ARCHITECTURE
   # Test the installation. The host is amd64 so that's the only one
   # installable.
   - |
