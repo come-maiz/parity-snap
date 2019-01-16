@@ -21,7 +21,7 @@ parts:
     source: https://github.com/paritytech/parity-ethereum.git
     plugin: nil
     build-packages:
-      - cargo
+      - curl
       - g++
       - libudev-dev
       - libudev1
@@ -29,6 +29,7 @@ parts:
       - libc6
       - libstdc++6
     override-build: |
-       cargo build --release --features final
+       curl https://sh.rustup.rs -sSf | sh -s -- -y
+       $HOME/.cargo/bin/cargo build --release --features final
        mkdir $SNAPCRAFT_PART_INSTALL/bin
        mv target/release/parity $SNAPCRAFT_PART_INSTALL/bin/
