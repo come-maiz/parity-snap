@@ -26,7 +26,6 @@ parts:
       - libudev-dev
       - libudev1
       - cmake
-    stage-packages:
       - libc6
       - libstdc++6
     override-build: |
