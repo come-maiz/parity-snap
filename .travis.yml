@@ -16,7 +16,7 @@ env:
   - ARCHITECTURE=amd64 BRANCH=stable CHANNEL=candidate
   - ARCHITECTURE=i386 BRANCH=master CHANNEL=edge
   - ARCHITECTURE=i386 BRANCH=beta CHANNEL=beta
-  - ARCHITECTURE=i386 BRANCH=candidate CHANNEL=candidate
+  - ARCHITECTURE=i386 BRANCH=stable CHANNEL=candidate
   - ARCHITECTURE=armhf BRANCH=master CHANNEL=edge
   - ARCHITECTURE=armhf BRANCH=beta CHANNEL=beta
   - ARCHITECTURE=armhf BRANCH=stable CHANNEL=candidate
