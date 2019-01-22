@@ -28,7 +28,8 @@ script:
   # Decrypt the login credentials.
   - openssl aes-256-cbc -K $encrypted_6f2c54a3a0c1_key -iv $encrypted_6f2c54a3a0c1_iv -in snapcraft-login.enc -out snapcraft-login -d
   - snapcraft login --with snapcraft-login
-  - ! ./scripts/is_released $ARCHITECTURE $BRANCH $CHANNEL || travis_terminate 0
+  - |
+    ! ./scripts/is_released $ARCHITECTURE $BRANCH $CHANNEL || travis_terminate 0
   - /snap/bin/snapcraft clean
   - |
     sed -i "0,/source-tag/s/source-tag:.*$/source-tag: '"$BRANCH"'/g" snapcraft.yaml
