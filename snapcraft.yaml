@@ -1,5 +1,6 @@
 name: parity
-version: master
+# Get the version from the parity part.
+adopt-info: parity
 summary: The fast, light, and robust EVM and WASM client.
 description: |
   Built for mission-critical use: Miners, service providers, and exchanges
@@ -19,6 +20,7 @@ apps:
 parts:
   parity:
     source: https://github.com/paritytech/parity-ethereum.git
+    source-tag: master
     plugin: nil
     build-packages:
       - curl
@@ -28,6 +30,10 @@ parts:
       - cmake
       - libc6
       - libstdc++6
+    override-pull: |
+       snapcraftctl pull
+       version="$(git describe --dirty --always)"
+       snapcraftctl set-version $version
     override-build: |
        curl https://sh.rustup.rs -sSf | sh -s -- -y
        $HOME/.cargo/bin/cargo build --release --features final

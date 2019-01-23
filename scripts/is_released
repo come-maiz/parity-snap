@@ -1,0 +1,29 @@
+#!/bin/bash
+#
+# Check whether a branch has been released to the snap store.
+# Arguments:
+#   architecture: the architecture of the snap to check.
+#   branch: the source code branch to check.
+#   channel: the snap store channel to check.
+
+set -ev
+
+if [ "$#" -lt 3 ]; then
+    echo "Usage: $0 <architecture> <branch> <channel>"
+    exit 1
+fi
+
+readonly ARCHITECTURE="$1"
+readonly BRANCH="$2"
+readonly CHANNEL="$3"
+
+last_released_version="$(snapcraft status parity | grep "$ARCHITECTURE" -C 3 | grep "$CHANNEL" | awk '{print $2}')"
+echo "Last released version: $last_released_version"
+rm -rf /tmp/parity-ethereum
+git clone https://github.com/paritytech/parity-ethereum --branch "$BRANCH" --depth 1 /tmp/parity-ethereum
+last_committed_version="$(git -C /tmp/parity-ethereum/ describe --dirty --always)"
+echo "Last committed version: $last_committed_version"
+
+if [ "${last_committed_version}" != "${last_released_version}" ]; then
+  exit 1
+fi
