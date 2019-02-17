@@ -5,4 +5,4 @@ parity-snap
 
 [Parity Ethereum](https://github.com/paritytech/parity-ethereum) packaged as a snap.
 
-
+Get it on [Snapcraft](https://snapcraft.io/parity).
